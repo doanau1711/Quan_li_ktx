@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') -%>
+        <style>
+            .btnDelete,
+            .btnEdit {
+                font-size: 15px;
+            }
+
+            .btnDelete {
+                color: red;
+            }
+
+            .btnEdit {
+                color: #1761fd;
+            }
+
+            *[id$=errors] {
+                color: red;
+                font-style: italic;
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                padding-top: 100px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0, 0, 0);
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                border-radius: 4px;
+                width: 20%;
+            }
+
+            .table th {
+                font-size: medium;
+                font-weight: 1000;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            h4 {
+                font-weight: 1000;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('../partials/leftsidebar') -%>
+        <div class="page-wrapper">
+            <!-- Top Bar Start -->
+            <%- include('../partials/topbar') -%>
+
+                <!-- Top Bar End -->
+                <!-- Page Content-->
+                <div class="page-content">
+
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h1 class="font-54 fw-bold mt-10 mb-4">Quản lí sinh viên</h1>
+                        </div>
+                        <!--end card-header-->
+                        <div class="card-body">
+                            <% if (typeof(error) !="undefined" ) { %>
+                                <span style="color:red;font-weight:550; text-align:center">
+                                    <%= error %>
+                                </span>
+                                <% } %>
+                                    <!-- id="datatable" -->
+                                    <% if (typeof(phong) !="undefined" ) { %>
+                                        <h4>Danh sách sinh viên phòng <%= phong %>
+                                        </h4>
+                                        <% } else{ %>
+                                            <h4>Danh sách sinh viên</h4>
+                                            <% } %>
+                                                <table id="datatable"
+                                                    class="table table-bordered dt-responsive nowrap table-striped table-hover"
+                                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Mã sinh viên</th>
+                                                            <th>Họ và tên</th>
+
+                                                            <th>Giới tính</th>
+
+
+                                                            <th>Lớp</th>
+
+
+                                                            <th>Đang ở</th>
+                                                            <% if (typeof(sttHD) !="undefined" ) { %>
+                                                                <th></th>
+                                                                <% } %>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <!-- <th></th> -->
+                                                                    <th></th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <!-- ... -->
+                                                        <% for(let i=0; i < dssv.length; i++){ %>
+                                                            <tr>
+                                                                <td>
+                                                                    <%= dssv[i].masv %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= dssv[i].hoten %>
+                                                                </td>
+                                                                <!-- <td>
+                                            <%= dssv[i].taikhoan %>
+                                        </td> -->
+                                                                <!-- <td>
+                                            <%= dssv[i].matkhau %></td> -->
+                                                                <td>
+                                                                    <%= dssv[i].gioitinh %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= dssv[i].lop %>
+                                                                </td>
+                                                                <td>
+                                                                    <%= dssv[i].sophong %>
+                                                                </td>
+                                                                <% if (typeof(sttHD) !="undefined" ) { %>
+                                                                    <td style="color: <%= sttHD[i][1] %>;">
+                                                                        <%= sttHD[i][0] %>
+                                                                    </td>
+                                                                    <% } %>
+                                                                        <td><a class="btnEdit"
+                                                                                href="/ktx/sinhvien/<%= dssv[i].masv %>"><i
+                                                                                    class="ti-settings"></i></a></td>
+                                                                        <!-- <td><a class="btnDelete"
+                                                                                href="/ktx/sinhvien/delete/<%= dssv[i].masv %>"><i
+                                                                                    class="ti-close"></i></a></td> -->
+                                                                        <td>
+                                                                            <% if (typeof(sttHD) !="undefined" ) { %>
+                                                                                <% if (sttHD[i][0] !="Đã có hợp đồng" )
+                                                                                    { %>
+
+                                                                                    <a style="color: black;"
+                                                                                        href="/ktx/sinhvien/laphd/<%= dssv[i].masv %>"><i
+                                                                                            class="ti-layout-cta-left"></i></a>
+
+                                                                                    <% } %>
+                                                                                        <% } %>
+
+
+
+                                                                        </td>
+
+                                                                        <td>
+
+
+                                                                            <a style="color: black;"
+                                                                                href="/ktx/sinhvien/lapbienban/<%= dssv[i].masv %>"><i
+                                                                                    class=" ti-marker-alt "></i></a>
+
+
+                                                                        </td>
+                                                            </tr>
+
+                                                            <% } %>
+
+                                                    </tbody>
+                                                </table>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <!--end card-->
+                    <!-- container -->
+                    <footer class="footer text-center text-sm-start">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        2021 Dastone <span class="text-muted d-none d-sm-inline-block float-end">Crafted
+                            with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes
+                        </span>
+                    </footer>
+                    <!--end footer-->
+                </div>
+                <!-- end page content -->
+        </div>
+        <%- include('../partials/footer') -%>
+
+</body>
+
+</html>

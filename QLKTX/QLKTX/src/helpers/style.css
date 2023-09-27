@@ -1,0 +1,75 @@
+.wrapper {
+    line-height: 24px;
+    margin-top: 50px;
+    width: 45%;
+    margin: 50px auto;
+}
+
+
+.header {
+    display: flex;
+}
+
+.f-header {
+    width: 30%;
+}
+
+.truong-f-header {
+    display: flex;
+}
+
+.ten-truong {
+    margin-top: 24px;
+    margin-left: 8px;
+}
+
+.phong {
+    margin-top: 0px;
+    text-align: center;
+}
+
+.s-header {
+    width: 70%;
+    text-align: center;
+}
+
+.doclap {
+    text-align: center;
+    margin-top: 4px;
+}
+
+
+/* body */
+.title-body {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.container {
+    text-align: justify;
+}
+
+
+.body-header-content {
+}
+
+
+
+.content-6 {
+    margin-top: -20px;
+}
+
+
+
+.footer {
+    display: flex;
+}
+
+.benA {
+    text-align: center;
+    width: 50%;
+}
+
+.kiten {
+    margin-top: -16px;
+}

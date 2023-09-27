@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') -%>
+
+</head>
+
+<body>
+    <%- include('../partials/leftsidebar') -%>
+        <% var listPhong=phong %>
+            <div class="page-wrapper">
+                <!-- Top Bar Start -->
+                <%- include('../partials/topbar') -%>
+                    <!-- Top Bar End -->
+                    <!-- Page Content-->
+                    <div class="page-content">
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4 class="card-title">Thông tin sinh viên</h4>
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+                            </div>
+                            <!--end card-header-->
+                            <div class="card-body">
+                                <% if (typeof(error) !="undefined" ) { %>
+                                    <span style="color:red;font-weight:550; text-align:center">
+                                        <%= error %>
+                                    </span>
+                                    <% } %>
+
+                                        <form method="post">
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Mã
+                                                    hợp
+                                                    đồng</label>
+                                                <div class="col-lg-9 col-xl-8">
+                                                    <input name="mahd" class="form-control" type="text"
+                                                        value="<%= mahd %>" required readonly />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Mã
+                                                    nhân
+                                                    viên</label>
+                                                <div class="col-lg-9 col-xl-8">
+                                                    <input name="manv" class="form-control" type="text"
+                                                        value="<%= manv %>" required readonly />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Mã
+                                                    sinh
+                                                    viên</label>
+                                                <div class="col-lg-9 col-xl-8">
+                                                    <input name="masv" class="form-control" type="text"
+                                                        value="<%= masv %>" required readonly />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Ngày
+                                                    lập</label>
+                                                <div class="col-lg-9 col-xl-8">
+                                                    <input name="ngaylap" class="form-control" type="date"
+                                                        value="<%= ngaylap %>" required readonly />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Ngày
+                                                    bắt đầu</label>
+                                                <div class="col-lg-9 col-xl-8">
+                                                    <input name="ngaybatdau" id="ngaybd" class="form-control"
+                                                        type="date" required onchange="updateKT(value)" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Thời
+                                                    hạn</label>
+                                                <div class="col-lg-9 col-xl-8">
+                                                    <select name="thoihan" id="thoihan" onchange="getKT(value)">
+                                                        <option disabled selected value> -- select an option --
+                                                        </option>
+                                                        <option value="6">6 tháng</option>
+                                                        <option value="12">12 tháng</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Ngày
+                                                    kết thúc</label>
+                                                <div class="col-lg-9 col-xl-8">
+                                                    <input name="ngayketthuc" id="ngaykt" class="form-control"
+                                                        type="date" required />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Loại
+                                                    phòng</label>
+                                                <div class="col-lg-9 col-xl-8">
+                                                    <select name="loaiphong" id="loaiphong"
+                                                        onchange="changeLoai(value)">
+
+                                                        <% for(let i=0; i < loaiphong.length; i++){ %>
+                                                            <option value="<%= loaiphong[i].maloaiphong %>">
+                                                                <%= loaiphong[i].tenloaiphong %>
+                                                            </option>
+
+                                                            <% } %>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">
+                                                    Phòng</label>
+                                                <div class="col-lg-9 col-xl-8" id="phong">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label
+                                                    class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Thành
+                                                    tiền</label>
+                                                <div class="col-lg-9 col-xl-8">
+                                                    <input class="form-control" id="gia" type="text" required value=""
+                                                        name="thanhtien" readonly />
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="form-group row">
+                                                <div class="col-lg-9 col-xl-8 offset-lg-3">
+                                                    <button type="submit"
+                                                        class="btn btn-sm btn-outline-primary">Thêm</button>
+                                                    <button onclick="location.href ='/ktx'"
+                                                        class="btn btn-sm btn-outline-danger">Hủy
+                                                        bỏ</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+
+                        <!-- container -->
+                        <footer class="footer text-center text-sm-start">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>
+
+                            2021 Dastone <span class="text-muted d-none d-sm-inline-block float-end">Crafted
+                                with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes
+                            </span>
+                        </footer>
+                        <!--end footer-->
+                    </div>
+                    <!-- end page content -->
+            </div>
+
+
+            <script>
+
+                var myDiv = document.getElementById("phong");
+                var selectList = document.createElement("select");
+                selectList.setAttribute("id", "phong");
+                selectList.setAttribute("name", "phong");
+                // var thoihan1 = document.getElementById('thoihan').value
+                myDiv.appendChild(selectList);
+                let listPhong = []
+
+                    <% for (let i = 0; i < phong.length; i++) { %>
+                        listPhong.push({ sophong: '<%= phong[i].sophong %>', maloaiphong: '<%= phong[i].maloaiphong %>' })
+                        <% } %>
+
+
+                            console.log(listPhong);
+
+                let listGia = []
+                    <% for (let i = 0; i < loaiphong.length; i++) { %>
+                        listGia.push({ maloaiphong: '<%= loaiphong[i].maloaiphong %>', gia: '<%= loaiphong[i].gia %>' })
+                        <% } %>
+                            console.log(listGia);
+
+
+                let gia = document.getElementById('gia')
+                let temp = document.getElementById('loaiphong')
+                for (let i = 0; i < listPhong.length; i++) {
+                    if (listPhong[i].maloaiphong == temp.value) {
+                        console.log(listPhong[i].maloaiphong);
+                        var option = document.createElement("option");
+                        option.setAttribute("value", listPhong[i].sophong);
+                        option.text = listPhong[i].sophong;
+                        selectList.appendChild(option);
+                    }
+                }
+                for (let i = 0; i < listGia.length; i++) {
+                    if (listGia[i].maloaiphong == temp.value) {
+                        var thoihan1 = document.getElementById('thoihan').value
+                        gia.value = parseInt(listGia[i].gia) * parseInt(thoihan1)
+                    }
+                }
+                function changeLoai(value1) {
+                    while (selectList.firstChild) {
+                        selectList.firstChild.remove()
+                    }
+
+                    for (let i = 0; i < listPhong.length; i++) {
+                        if (listPhong[i].maloaiphong == value1) {
+                            console.log(listPhong[i].maloaiphong);
+                            var option = document.createElement("option");
+                            option.setAttribute("value", listPhong[i].sophong);
+                            option.text = listPhong[i].sophong;
+                            selectList.appendChild(option);
+                        }
+                    }
+                    for (let i = 0; i < listGia.length; i++) {
+                        if (listGia[i].maloaiphong == value1) {
+                            var thoihan1 = document.getElementById('thoihan').value
+                            gia.value = parseInt(listGia[i].gia) * parseInt(thoihan1)
+
+                        }
+                    }
+                }
+
+
+                function getKT(value1) {
+                    const m = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+                    const thoihan = parseInt(value1)
+                    const ngaybd = document.getElementById('ngaybd').value.split('-')
+                    const ngaykt = document.getElementById('ngaykt')
+                    let gia = document.getElementById('gia')
+
+
+                    console.log(ngaybd);
+
+                    if (parseInt(ngaybd[1]) + thoihan < 13) {
+                        if (m[parseInt(ngaybd[1]) + thoihan - 1] >= parseInt(ngaybd[2])) {
+                            if (parseInt(ngaybd[1]) + thoihan < 10) {
+                                ngaykt.value = `${ngaybd[0]}-0${parseInt(ngaybd[1]) + thoihan}-${ngaybd[2]}`
+                                console.log(`${ngaybd[0]}-0${parseInt(ngaybd[1]) + thoihan}-${ngaybd[2]}`);
+                            } else {
+                                ngaykt.value = `${ngaybd[0]}-${parseInt(ngaybd[1]) + thoihan}-${ngaybd[2]}`
+                            }
+                        } else {
+
+                            if (parseInt(ngaybd[1]) + thoihan < 10) {
+                                ngaykt.value = `${ngaybd[0]}-0${parseInt(ngaybd[1]) + thoihan}-${m[parseInt(ngaybd[1]) + thoihan - 1]}`
+                            } else {
+                                ngaykt.value = `${ngaybd[0]}-${parseInt(ngaybd[1]) + thoihan}-${m[parseInt(ngaybd[1]) + thoihan - 1]}`
+                            }
+                        }
+
+                    } else {
+                        if (m[parseInt(ngaybd[1]) + thoihan - 13] >= parseInt(ngaybd[2])) {
+                            if (parseInt(ngaybd[1]) + thoihan - 13 < 10) {
+                                ngaykt.value = `${parseInt(ngaybd[0]) + 1}-0${parseInt(ngaybd[1]) + thoihan - 12}-${ngaybd[2]}`
+                            } else {
+                                ngaykt.value = `${parseInt(ngaybd[0]) + 1}-${parseInt(ngaybd[1]) + thoihan - 12}-${ngaybd[2]}`
+                            }
+                        } else {
+
+                            if (parseInt(ngaybd[1]) + thoihan - 13 < 10) {
+                                ngaykt.value = `${parseInt(ngaybd[0]) + 1}-0${parseInt(ngaybd[1]) + thoihan - 12}-${m[parseInt(ngaybd[1]) + thoihan - 13]}`
+
+                            } else {
+                                ngaykt.value = `${parseInt(ngaybd[0]) + 1}-${parseInt(ngaybd[1]) + thoihan - 12}-${m[parseInt(ngaybd[1]) + thoihan - 13]}`
+
+                            }
+                        }
+
+                    }
+                    let temp1 = document.getElementById('loaiphong')
+                    for (let i = 0; i < listGia.length; i++) {
+                        if (listGia[i].maloaiphong == temp1.value) {
+                            var thoihan1 = document.getElementById('thoihan').value
+                            gia.value = parseInt(listGia[i].gia) * parseInt(thoihan1)
+                        }
+                    }
+
+                }
+                function updateKT(value1) {
+                    const m = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+                    const thoihan = parseInt(document.getElementById('thoihan').value)
+                    const ngaybd = value1.split('-')
+                    const ngaykt = document.getElementById('ngaykt')
+
+
+                    console.log(thoihan);
+
+                    if (parseInt(ngaybd[1]) + thoihan < 13) {
+                        if (m[parseInt(ngaybd[1]) + thoihan - 1] >= parseInt(ngaybd[2])) {
+                            if (parseInt(ngaybd[1]) + thoihan < 10) {
+                                ngaykt.value = `${ngaybd[0]}-0${parseInt(ngaybd[1]) + thoihan}-${ngaybd[2]}`
+                                console.log(`${ngaybd[0]}-0${parseInt(ngaybd[1]) + thoihan}-${ngaybd[2]}`);
+                            } else {
+                                ngaykt.value = `${ngaybd[0]}-${parseInt(ngaybd[1]) + thoihan}-${ngaybd[2]}`
+                            }
+                        } else {
+
+                            if (parseInt(ngaybd[1]) + thoihan < 10) {
+                                ngaykt.value = `${ngaybd[0]}-0${parseInt(ngaybd[1]) + thoihan}-${m[parseInt(ngaybd[1]) + thoihan - 1]}`
+                            } else {
+                                ngaykt.value = `${ngaybd[0]}-${parseInt(ngaybd[1]) + thoihan}-${m[parseInt(ngaybd[1]) + thoihan - 1]}`
+                            }
+                        }
+
+                    } else {
+                        if (m[parseInt(ngaybd[1]) + thoihan - 13] >= parseInt(ngaybd[2])) {
+                            if (parseInt(ngaybd[1]) + thoihan - 13 < 10) {
+                                ngaykt.value = `${parseInt(ngaybd[0]) + 1}-0${parseInt(ngaybd[1]) + thoihan - 12}-${ngaybd[2]}`
+                            } else {
+                                ngaykt.value = `${parseInt(ngaybd[0]) + 1}-${parseInt(ngaybd[1]) + thoihan - 12}-${ngaybd[2]}`
+                            }
+                        } else {
+
+                            if (parseInt(ngaybd[1]) + thoihan - 13 < 10) {
+                                ngaykt.value = `${parseInt(ngaybd[0]) + 1}-0${parseInt(ngaybd[1]) + thoihan - 12}-${m[parseInt(ngaybd[1]) + thoihan - 13]}`
+
+                            } else {
+                                ngaykt.value = `${parseInt(ngaybd[0]) + 1}-${parseInt(ngaybd[1]) + thoihan - 12}-${m[parseInt(ngaybd[1]) + thoihan - 13]}`
+
+                            }
+                        }
+
+                    }
+
+                }
+
+
+
+
+            </script>
+
+            <%- include('../partials/footer') -%>
+
+</body>
+
+</html>

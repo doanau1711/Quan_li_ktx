@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') -%>
+        <style>
+            .btnDelete,
+            .btnEdit {
+                font-size: 15px;
+            }
+
+            .btnDelete {
+                color: red;
+            }
+
+            .btnEdit {
+                color: #1761fd;
+            }
+
+            *[id$=errors] {
+                color: red;
+                font-style: italic;
+            }
+
+            .table th {
+                font-size: medium;
+                font-weight: 1000;
+
+            }
+
+            .table th {
+                font-size: medium;
+                font-weight: 1000;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            h4 {
+                font-weight: 1000;
+            }
+        </style>
+
+</head>
+
+<body>
+    <%- include('../partials/leftsidebar') -%>
+        <div class="page-wrapper">
+            <!-- Top Bar Start -->
+            <%- include('../partials/topbar') -%>
+
+                <!-- Top Bar End -->
+                <!-- Page Content-->
+                <div class="page-content">
+
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h1 class="font-54 fw-bold mt-10 mb-4">Quản lí tài khoản nhân viên</h1>
+                        </div>
+                        <!--end card-header-->
+                        <div class="card-body">
+                            <!-- id="datatable" -->
+                            <h4>Danh sách tài khoản nhân viên</h4>
+                            <table id="datatable"
+                                class="table table-bordered dt-responsive nowrap table-striped table-hover"
+                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Mã nhân viên</th>
+                                        <th>Họ tên nhân viên</th>
+                                        <!-- <th>Tài khoản</th> -->
+                                        <!-- <th>Mật khẩu</th> -->
+                                        <th>Phân quyền</th>
+                                        <th>Trạng thái</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for(let i=0; i < dsnv.length; i++){ %>
+                                        <tr>
+                                            <td>
+                                                <%= dsnv[i].manv %>
+                                            </td>
+                                            <td>
+                                                <%= dsnv[i].hoten %>
+                                            </td>
+                                            <!-- <td>
+                                                <%= dsnv[i].taikhoan %>
+                                            </td> -->
+                                            <!-- <td>
+                                                <%= dsnv[i].matkhau %></td> -->
+                                            <td>
+                                                <%= dsnv[i].tenrole %>
+                                            </td>
+                                            <td>
+                                                <%= dsnv[i].trangthai %>
+                                            </td>
+                                            <td><a class="btnEdit" href="/user/manage/edit/<%= dsnv[i].manv %>"><i
+                                                        class="ti-settings"></i></a></td>
+                                            <% if(dsnv[i].trangthai=="Hoạt động" ) { %>
+                                                <td><a class="btnDelete" href="/user/manage/lock/<%= dsnv[i].manv %>"><i
+                                                            class="ti-close"></i></a></td>
+                                                <% } else{ %>
+                                                    <td><a class="btnDelete"
+                                                            href="/user/manage/unlock/<%= dsnv[i].manv %>"><i
+                                                                class="ti-check"></i></a></td>
+                                                    <% } %>
+                                                        <td><a class="btnDelete"
+                                                                href="/user/manage/reset/<%= dsnv[i].manv %>"><i
+                                                                    class="ti-reload"></i></a></td>
+                                        </tr>
+
+                                        <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <!--end card-->
+                    <!-- container -->
+                    <footer class="footer text-center text-sm-start">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+                        2021 Dastone <span class="text-muted d-none d-sm-inline-block float-end">Crafted
+                            with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes
+                        </span>
+                    </footer>
+                    <!--end footer-->
+                </div>
+                <!-- end page content -->
+        </div>
+        <%- include('../partials/footer') -%>
+
+</body>
+
+</html>

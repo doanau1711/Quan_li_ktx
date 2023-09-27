@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') -%>
+        <style>
+            .btnDelete,
+            .btnEdit {
+                font-size: 15px;
+            }
+
+            .btnDelete {
+                color: red;
+            }
+
+            .btnEdit {
+                color: #1761fd;
+            }
+
+            *[id$=errors] {
+                color: red;
+                font-style: italic;
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                padding-top: 100px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0, 0, 0);
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                border-radius: 4px;
+                width: 20%;
+            }
+
+            .table th {
+                font-size: medium;
+                font-weight: 1000;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            h4 {
+                font-weight: 1000;
+            }
+        </style>
+
+</head>
+
+<body>
+    <%- include('../partials/leftsidebar') -%>
+        <div class="page-wrapper">
+            <!-- Top Bar Start -->
+            <%- include('../partials/topbar') -%>
+                <!-- Top Bar End -->
+                <!-- Page Content-->
+                <div class="page-content">
+
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h1 class="font-54 fw-bold mt-10 mb-4">Quản lí hóa đơn điện</h1>
+                        </div>
+                        <!--end card-header-->
+                        <div class="card-body">
+                            <% if (typeof(error) !="undefined" ) { %>
+                                <span style="color:red;font-weight:550; text-align:center">
+                                    <%= error %>
+                                </span>
+                                <% } %>
+                                    <!-- id="datatable" -->
+                                    <h4>Danh sách hóa đơn</h4>
+                                    <table id="datatable"
+                                        class="table table-bordered dt-responsive nowrap table-striped table-hover"
+                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã hóa đơn</th>
+                                                <th>Mã nhân viên lập</th>
+                                                <th>Phòng</th>
+                                                <th>Giá điện</th>
+                                                <th>Ngày lập</th>
+                                                <th>Chỉ số điện đầu</th>
+                                                <th>Chỉ số điện cuối</th>
+                                                <th>Trạng thái</th>
+                                                <th>Thành tiền</th>
+                                                <th></th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- ... -->
+                                            <% for(let i=0; i < dshd.length; i++){ %>
+                                                <tr>
+                                                    <td>
+                                                        <%= dshd[i].MAHD %>
+                                                    </td>
+                                                    <td>
+                                                        <%= dshd[i].MANV %>
+
+                                                    </td>
+                                                    <td>
+                                                        <%= dshd[i].SOPHONG %>
+                                                    </td>
+                                                    <td>
+                                                        <%= dshd[i].GIADIEN %>
+                                                    </td>
+                                                    <td>
+                                                        <%= dshd[i].NGAYLAP %>
+                                                    </td>
+                                                    <td>
+                                                        <%= dshd[i].CHISODIENDAU %>
+                                                    </td>
+                                                    <td>
+                                                        <%= dshd[i].CHISODIENCUOI %>
+                                                    </td>
+                                                    <td>
+                                                        <%= dshd[i].TRANGTHAI %>
+                                                    </td>
+                                                    <td>
+                                                        <%= (dshd[i].CHISODIENCUOI - dshd[i].CHISODIENDAU) *
+                                                            dshd[i].GIADIEN %>
+                                                    </td>
+                                                    <td>
+                                                        <% if (dshd[i].TRANGTHAI=='Chưa thanh toán' ) { %>
+                                                            <a href="/ktx/hoadondien/thanhtoan/<%= dshd[i].MAHD %>"
+                                                                style="color: crimson;">Thanh
+                                                                toán</a>
+                                                            <% } %>
+                                                    </td>
+                                                </tr>
+
+                                                <% } %>
+
+                                        </tbody>
+                                    </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h4 class="card-title">Hóa đơn điện</h4>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end card-header-->
+                        <div class="card-body">
+                            <% if (typeof(error) !="undefined" ) { %>
+                                <span style="color:red;font-weight:550; text-align:center">
+                                    <%= error %>
+                                </span>
+                                <% } %>
+
+                                    <form method="post">
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Mã
+                                                hóa đơn</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input name="mahd" class="form-control" type="text" value="<%= mahd %>"
+                                                    required readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Mã
+                                                nhân
+                                                viên</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input name="manv" class="form-control" type="text" value="<%= manv %>"
+                                                    required readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">
+                                                Phòng</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <select name="phong">
+
+                                                    <% for(let i=0; i < phong.length; i++){ %>
+                                                        <option value="<%= phong[i].sophong %>">
+                                                            <%= phong[i].sophong %>
+                                                        </option>
+
+                                                        <% } %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Ngày
+                                                lập</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input name="ngaylap" class="form-control" type="date"
+                                                    value="<%= ngaylap %>" required readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Giá
+                                                điện</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input name="giadien" class="form-control" type="text"
+                                                    value="<%= giadien %>" id="gia" required readonly />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Chỉ số
+                                                điện đầu</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input name="chisodiendau" id="csd" class="form-control" type="text"
+                                                    required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Chỉ số
+                                                điện cuối</label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input name="chisodiencuoi" id="csc" class="form-control" type="text"
+                                                    required />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center"><button
+                                                    type="button" class="btn btn-sm btn-outline-primary"
+                                                    onclick="tinhtien()">Thành
+                                                    tiền</button></label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <input id="thanhtien" class="form-control" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center"></label>
+                                            <div class="col-lg-9 col-xl-8">
+                                                <select name="trangthai">
+
+                                                    <option value="Chưa thanh toán" selected>Thanh toán sau</option>
+                                                    <option value="Đã thanh toán">Thanh toán ngay</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-9 col-xl-8 offset-lg-3">
+                                                <button type="submit"
+                                                    class="btn btn-sm btn-outline-primary">Thêm</button>
+                                                <button onclick="location.href ='/ktx'"
+                                                    class="btn btn-sm btn-outline-danger">Hủy
+                                                    bỏ</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                        </div>
+                        <!--end card-body-->
+                    </div>
+                    <!--end card-->
+
+                    <!-- container -->
+                    <footer class="footer text-center text-sm-start">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+
+                        2021 Dastone <span class="text-muted d-none d-sm-inline-block float-end">Crafted
+                            with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes
+                        </span>
+                    </footer>
+                    <!--end footer-->
+                </div>
+                <!-- end page content -->
+        </div>
+        <script>
+            function tinhtien() {
+                gia = document.getElementById('gia')
+                csd = document.getElementById('csd')
+                csc = document.getElementById('csc')
+                thanhtien = document.getElementById('thanhtien')
+                console.log(gia, csd, csc);
+                thanhtien.value = (parseInt(csc.value) - parseInt(csd.value)) * parseInt(gia.value)
+
+
+            }
+
+        </script>
+        <%- include('../partials/footer') -%>
+
+</body>
+
+</html>

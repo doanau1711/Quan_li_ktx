@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') -%>
+        <style>
+            .btnDelete,
+            .btnEdit {
+                font-size: 15px;
+            }
+
+            .btnDelete {
+                color: red;
+            }
+
+            .btnEdit {
+                color: #1761fd;
+            }
+
+            *[id$=errors] {
+                color: red;
+                font-style: italic;
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                padding-top: 100px;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0, 0, 0);
+                background-color: rgba(0, 0, 0, 0.4);
+            }
+
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                border-radius: 4px;
+                width: 20%;
+            }
+
+            .table th {
+                font-size: medium;
+                font-weight: 1000;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            h4 {
+                font-weight: 1000;
+            }
+        </style>
+</head>
+
+<body>
+    <%- include('../partials/leftsidebar') -%>
+        <div class="page-wrapper">
+            <!-- Top Bar Start -->
+            <%- include('../partials/topbar') -%>
+
+                <!-- Top Bar End -->
+                <!-- Page Content-->
+                <div class="page-content">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h3 class="card-title">Kiểm tra doanh thu</h3>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <div class="card-body">
+                            <form action="/user/doanhthu">
+
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Tìm theo
+                                        tháng</label>
+                                    <div class="col-lg-9 col-xl-8">
+                                        <input type="month" name="thang" min="2023-03">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Tìm theo
+                                        năm</label>
+                                    <div class="col-lg-9 col-xl-8">
+                                        <input type="number" name="nam">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-9 col-xl-8 offset-lg-3">
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Tìm</button>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                    <% if (typeof(dshd) !="undefined" ) { %>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h4 class="card-title">Doanh sách hợp đồng <%= title %>
+                                        </h4>
+                                    </div>
+                                    <!--end col-->
+                                </div>
+                                <!--end row-->
+                            </div>
+
+                            <!--end card-header-->
+                            <div class="card-body">
+                                <!-- id="datatable" -->
+                                <h4>Tổng doanh thu: <%= tong %>
+                                </h4>
+                                <table id="datatable"
+                                    class="table table-bordered dt-responsive nowrap table-striped table-hover"
+                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Mã hợp đồng</th>
+                                            <th>Nhân viên lập</th>
+                                            <th>Tên sinh viên</th>
+                                            <th>Ngày lập</th>
+                                            <th>Ngày bắt đầu</th>
+                                            <th>Ngày kết thúc</th>
+                                            <th>Số phòng</th>
+                                            <th>Trạng thái</th>
+                                            <th>Đơn giá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- ... -->
+                                        <% for(let i=0; i < dshd.length; i++){ %>
+                                            <tr>
+                                                <td>
+                                                    <%= dshd[i].MAHOPDONG %>
+                                                </td>
+                                                <td>
+                                                    <%= dshd[i].MANV %>
+                                                </td>
+                                                <td>
+                                                    <a href="/ktx/sinhvien/<%= dshd[i].masv %>">
+                                                        <%= dshd[i].MASV %>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <%= dshd[i].NGAYLAP %>
+                                                </td>
+                                                <td>
+                                                    <%= dshd[i].NGAYBATDAUHD %>
+                                                </td>
+                                                <td>
+                                                    <%= dshd[i].NGAYKETTHUCHD %>
+                                                </td>
+                                                <td>
+                                                    <%= dshd[i].SOPHONG %>
+                                                </td>
+                                                <td>
+                                                    <%= dshd[i].TRANGTHAIHUY %>
+                                                </td>
+                                                <td>
+                                                    <%= dshd[i].GIA %>
+                                                </td>
+                                            </tr>
+
+                                            <% } %>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <% } %>
+
+
+
+
+                            <!--end card-->
+                            <!-- container -->
+                            <footer class="footer text-center text-sm-start">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>
+                                2021 Dastone <span class="text-muted d-none d-sm-inline-block float-end">Crafted
+                                    with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes
+                                </span>
+                            </footer>
+                            <!--end footer-->
+                </div>
+                <!-- end page content -->
+        </div>
+        <%- include('../partials/footer') -%>
+
+</body>
+
+</html>

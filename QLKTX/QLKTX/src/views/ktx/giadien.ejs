@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') -%>
+
+</head>
+
+<body>
+    <%- include('../partials/leftsidebar') -%>
+        <div class="page-wrapper">
+            <!-- Top Bar Start -->
+            <%- include('../partials/topbar') -%>
+                <!-- Top Bar End -->
+                <!-- Page Content-->
+                <div class="page-content">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h4 class="card-title">Thay đổri giá điện</h4>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end card-header-->
+                        <div class="card-body">
+
+                            <form method="post">
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Nhập giá điện
+                                        mới</label>
+                                    <div class="col-lg-9 col-xl-8">
+                                        <input name="giadien" class="form-control" type="text" required />
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-lg-9 col-xl-8 offset-lg-3">
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Thêm</button>
+                                        <button onclick="location.href ='/ktx'"
+                                            class="btn btn-sm btn-outline-danger">Hủy
+                                            bỏ</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--end card-body-->
+                    </div>
+                    <!--end card-->
+
+                    <!-- container -->
+                    <footer class="footer text-center text-sm-start">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+
+                        2021 Dastone <span class="text-muted d-none d-sm-inline-block float-end">Crafted
+                            with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes
+                        </span>
+                    </footer>
+                    <!--end footer-->
+                </div>
+                <!-- end page content -->
+        </div>
+        <%- include('../partials/footer') -%>
+
+</body>
+
+</html>

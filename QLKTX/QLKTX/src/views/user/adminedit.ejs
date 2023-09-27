@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') -%>
+
+</head>
+
+<body>
+    <%- include('../partials/leftsidebar') -%>
+        <div class="page-wrapper">
+            <!-- Top Bar Start -->
+            <%- include('../partials/topbar') -%>
+                <!-- Top Bar End -->
+                <!-- Page Content-->
+                <div class="page-content">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h4 class="card-title">Thông tin nhân viên</h4>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end card-header-->
+                        <div class="card-body">
+
+
+                            <form method="post">
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Mã
+                                        NV</label>
+                                    <div class="col-lg-9 col-xl-8">
+                                        <input name="manv" class="form-control" type="text" readonly="true"
+                                            value="<%= manv %>" required />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Họ và
+                                        tên</label>
+                                    <div class="col-lg-9 col-xl-8">
+                                        <input name="hoten" class="form-control" type="text" value="<%= hoten1 %>"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Ngày
+                                        sinh</label>
+                                    <div class="col-lg-9 col-xl-8">
+                                        <input name="ngaysinh" class="form-control" type="date" value="<%= ngaysinh %>"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Địa
+                                        chỉ</label>
+                                    <div class="col-lg-9 col-xl-8">
+                                        <input name="diachi" class="form-control" type="text" value="<%= diachi %>"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Số điện
+                                        thoại</label>
+                                    <div class="col-lg-9 col-xl-8">
+                                        <input name="sdt" class="form-control" type="text" value="<%= sdt %>"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Email</label>
+                                    <div class="col-lg-9 col-xl-8">
+                                        <input name="email" class="form-control" type="email" value="<%= email %>"
+                                            required />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 text-end mb-lg-0 align-self-center">Chức vụ</label>
+                                    <div class="col-lg-9 col-xl-8">
+                                        <select name="quyentk">
+                                            <% if (quyentk=="Quản lý" ){ %>
+                                                <option value="Quản lý" selected>Quản lý</option>
+                                                <option value="Nhân viên">Nhân viên</option>
+                                                <% } else{ %>
+                                                    <option value="Nhân viên" selected>Nhân viên</option>
+                                                    <option value="Quản lý">Quản lý</option>
+                                                    <% } %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-9 col-xl-8 offset-lg-3">
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Thay
+                                            đổi</button>
+                                        <button onclick="location.href ='/user'"
+                                            class="btn btn-sm btn-outline-danger">Hủy
+                                            bỏ</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--end card-body-->
+                    </div>
+                    <!--end card-->
+
+
+                    <!-- container -->
+                    <footer class="footer text-center text-sm-start">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+
+                        2021 Dastone <span class="text-muted d-none d-sm-inline-block float-end">Crafted
+                            with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes
+                        </span>
+                    </footer>
+                    <!--end footer-->
+                </div>
+                <!-- end page content -->
+        </div>
+        <%- include('../partials/footer') -%>
+
+</body>
+
+</html>

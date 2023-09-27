@@ -1,0 +1,78 @@
+<div class="left-sidenav">
+    <!-- LOGO -->
+    <div class="brand">
+        <a href="/user" class="logo"> <span> <img src="/resources/dashtone/assets/images/logo-ptithcm.png"
+                    alt="logo-small" class="logo-sm">
+
+            </span>
+
+        </a>
+    </div>
+    <!--end logo-->
+    <div class="menu-content h-100" data-simplebar>
+        <ul class="metismenu left-sidenav-menu">
+            <li class="menu-label mt-0">Hệ thống</li>
+
+            <li><a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Tài
+                        khoản</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a class="nav-link" href="/user"><i class="ti-control-record"></i>Trang
+                            chủ</a></li>
+
+                </ul>
+            </li>
+            <% if (role=='Quản lý' ) { %>
+                <li><a href="javascript: void(0);"><i data-feather="grid"
+                            class="align-self-center menu-icon"></i><span>Quản
+                            lý</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                    <ul class="nav-second-level" aria-expanded="false">
+
+                        <li class="nav-item"><a class="nav-link" href="/user/add"><i class="ti-control-record"></i>Tài
+                                khoản nhân viên</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/user/manage"><i
+                                    class="ti-control-record"></i>Quản
+                                lí nhân viên</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="/user/doanhthu"><i
+                                    class="ti-control-record"></i>Xem doanh thu</a></li>
+
+
+                    </ul>
+                </li>
+                <% } %>
+                    <hr class="hr-dashed hr-menu">
+                    <li class="menu-label my-2">Kí túc xá</li>
+                    <li><a href="javascript: void(0);"> <i data-feather="home"
+                                class="align-self-center menu-icon"></i><span>Quản lí
+                                kí túc xá</span><span class="menu-arrow"><i
+                                    class="mdi mdi-chevron-right"></i></span></a>
+                        <ul class="nav-second-level" aria-expanded="false">
+
+                            <li class="nav-item"><a class="nav-link" href="/ktx"><i class="ti-control-record"></i>Quản
+                                    lí sinh viên</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/ktx/themsv"><i
+                                        class="ti-control-record"></i>Thêm sinh viên</a></li>
+                            <!-- <li class="nav-item"><a class="nav-link" href="/ktx/hopdong"><i
+                                        class="ti-control-record"></i>Lập hợp đồng</a></li> -->
+                            <li class="nav-item"><a class="nav-link" href="/ktx/hopdong"><i
+                                        class="ti-control-record"></i>Quản lý hợp đồng</a></li>
+
+                            <li class="nav-item"><a class="nav-link" href="/ktx/bienban"><i
+                                        class="ti-control-record"></i>Danh sách biên bản</a></li>
+
+                            <li class="nav-item"><a class="nav-link" href="/ktx/hoadondien">
+                                    <i class="ti-control-record"></i>Quản lí tiền điện</a></li>
+
+
+                            <li class="nav-item"><a class="nav-link" href="/ktx/phong"><i
+                                        class="ti-control-record"></i>Phòng</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/ktx/loaiphong">
+                                    <i class="ti-control-record"></i>Loại phòng</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/ktx/giadien">
+                                    <i class="ti-control-record"></i>Thay đổi giá điện</a></li>
+                        </ul>
+                    </li>
+
+        </ul>
+    </div>
+</div>

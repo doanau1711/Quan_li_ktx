@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head') -%>
+
+</head>
+
+<body>
+    <%- include('../partials/leftsidebar') -%>
+        <div class="page-wrapper">
+            <!-- Top Bar Start -->
+            <%- include('../partials/topbar') -%>
+                <!-- Top Bar End -->
+                <!-- Page Content-->
+                <div class="page-content">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h4 class="card-title">Thông tin sinh viên</h4>
+                                </div>
+                                <!--end col-->
+                            </div>
+                            <!--end row-->
+                        </div>
+                        <!--end card-header-->
+                        <div class="card-body">
+
+
+
+                        </div>
+                        <!--end card-body-->
+                    </div>
+                    <!--end card-->
+                    <div class="card">
+
+
+                        <div class="card-body">
+                            <!-- id="datatable" -->
+                            <h4>Danh sách hợp đồng</h4>
+                            <table id="datatable"
+                                class="table table-bordered dt-responsive nowrap table-striped table-hover"
+                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>Mã hợp đồng</th>
+                                        <th>Ngày lập</th>
+                                        <th>Ngày bắt đầu</th>
+                                        <th>Ngày kết thúc</th>
+                                        <th>Số phòng</th>
+                                        <th>Nhân viên lập</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- ... -->
+                                    <% for(let i=0; i < dshd.length; i++){ %>
+                                        <tr>
+                                            <td>
+                                                <%= dshd[i].MAHOPDONG %>
+                                            </td>
+                                            <td>
+                                                <%= dshd[i].NGAYLAP %>
+                                            </td>
+                                            <td>
+                                                <%= dshd[i].NGAYBATDAUHD %>
+                                            </td>
+                                            <td>
+                                                <%= dshd[i].NGAYKETTHUCHD %>
+                                            </td>
+                                            <td>
+                                                <%= dshd[i].SOPHONG %>
+                                            </td>
+                                            <td>
+                                                <%= dshd[i].HOTENNV %>
+                                            </td>
+                                        </tr>
+
+                                        <% } %>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- container -->
+                    <footer class="footer text-center text-sm-start">
+                        ©
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>
+
+                        2021 Dastone <span class="text-muted d-none d-sm-inline-block float-end">Crafted
+                            with <i class="mdi mdi-heart text-danger"></i> by Mannatthemes
+                        </span>
+                    </footer>
+                    <!--end footer-->
+                </div>
+                <!-- end page content -->
+        </div>
+        <%- include('../partials/footer') -%>
+
+</body>
+
+</html>
